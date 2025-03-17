@@ -1,11 +1,37 @@
+"use client";
+
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChatInterface from "@/components/chat-interface";
 import StatusBar from "@/components/status-bar";
 import ConversationVisualizer from "@/components/conversation-visualizer";
 import SuggestionPanel from "@/components/suggestion-panel";
+import {
+  ConversationProvider,
+  useConversation,
+} from "@/context/conversation-context";
+
+const LastOracIAMessage = () => {
+  const { messages } = useConversation();
+  const lastOracIAMessage = messages
+    .filter((msg) => msg.sender === "OracIA")
+    .pop();
+  return (
+    <p className="text-sm">
+      {lastOracIAMessage ? lastOracIAMessage.text : "No message"}
+    </p>
+  );
+};
 
 export default function Dashboard() {
+  return (
+    <ConversationProvider>
+      <DashboardContent />
+    </ConversationProvider>
+  );
+}
+
+function DashboardContent() {
   return (
     <div className="min-h-screen bg-gray-50 overflow-hidden">
       <header className="border-b p-4 bg-white flex items-center justify-between">
@@ -15,7 +41,7 @@ export default function Dashboard() {
             <h2 className="text-[20px] font-semibold">Fabio Rossi</h2>
           </div>
         </div>
-        <div className=" h-10 w-10 rounded-full bg-[#D9D9D9] "></div>
+        <div className="h-10 w-10 rounded-full bg-[#D9D9D9]"></div>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-10 gap-0">
@@ -25,7 +51,6 @@ export default function Dashboard() {
               <AvatarImage className="object-cover" />
               <AvatarFallback>OA</AvatarFallback>
             </Avatar>
-
             <span className="font-medium">OraclA</span>
           </div>
           <ChatInterface />
@@ -35,12 +60,12 @@ export default function Dashboard() {
           className="col-span-5 flex flex-col h-screen overflow-y-auto"
           style={{
             background: `linear-gradient(
-      0% #A59FC3,
-      22% #542B81,
-      51% #DC379F,
-      73% #F3A199,
-      92% #FAF6E8
-    )`,
+              0% #A59FC3,
+              22% #542B81,
+              51% #DC379F,
+              73% #F3A199,
+              92% #FAF6E8
+            )`,
           }}
         >
           <div className="border-b p-4 flex items-center justify-center w-full">
@@ -95,12 +120,7 @@ export default function Dashboard() {
 
               <div className="relative bg-white shadow-sm rounded-xl border border-[#EAE7DC] p-3 text-black leading-relaxed max-w-[90%] text-[16px]">
                 <div className="absolute -left-2 bottom-2 w-0 h-0 border-t-[6px] border-t-transparent border-r-[8px] border-r-[#F9F7F2] border-b-[6px] border-b-transparent"></div>
-
-                <p className="text-sm">
-                  Hello Fabio Rossi, welcome to ORAVOX, I'm OraclA, your sales
-                  intelligence agent. To tailor your experience, please{" "}
-                  <span className="font-bold">select your role</span>
-                </p>
+                <LastOracIAMessage />
               </div>
             </div>
 

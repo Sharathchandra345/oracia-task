@@ -1,15 +1,22 @@
 "use client";
+
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import {
+  useConversation,
+  conversationFlow,
+} from "@/context/conversation-context";
 
 export default function SuggestionPanel() {
   const [loading, setLoading] = useState(true);
+  const { currentStep, handleUserResponse } = useConversation();
+  const suggestions = conversationFlow[currentStep]?.suggestions || [];
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [currentStep]);
 
   return (
     <div className="mt-6">
@@ -19,33 +26,38 @@ export default function SuggestionPanel() {
       </div>
 
       <div className="mt-2 space-y-4">
-        {[1, 2].map((item) => (
-          <Card
-            key={item}
-            className="p-4 bg-none shadow-md border-2 border-[#1977F2] rounded-xl"
-          >
-            {loading ? (
-              <motion.div
-                initial={{ opacity: 0.3 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                  duration: 0.8,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-              >
-                <div className="flex justify-between items-center">
-                  <div className="h-2 w-3/4 bg-gray-200 rounded"></div>
-                  <div className="flex gap-1">
-                    <div className="h-4 w-4 bg-gray-200 rounded-full"></div>
-                    <div className="h-4 w-4 bg-gray-200 rounded-full"></div>
-                  </div>
+        {loading || suggestions.length === 0 ? (
+          <Card className="p-4 bg-none shadow-md border-2 border-[#1977F2] rounded-xl">
+            <motion.div
+              initial={{ opacity: 0.3 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 0.8,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            >
+              <div className="flex justify-between items-center">
+                <div className="h-2 w-3/4 bg-gray-200 rounded"></div>
+                <div className="flex gap-1">
+                  <div className="h-4 w-4 bg-gray-200 rounded-full"></div>
+                  <div className="h-4 w-4 bg-gray-200 rounded-full"></div>
                 </div>
-                <div className="mt-4 h-2 w-full bg-gray-200 rounded"></div>
-                <div className="mt-2 h-2 w-2/3 bg-gray-200 rounded"></div>
-                <div className="mt-4 h-2 w-1/3 bg-gray-200 rounded"></div>
-              </motion.div>
-            ) : (
+              </div>
+              <div className="mt-4 h-2 w-full bg-gray-200 rounded"></div>
+              <div className="mt-2 h-2 w-2/3 bg-gray-200 rounded"></div>
+              <div className="mt-4 h-2 w-1/3 bg-gray-200 rounded"></div>
+            </motion.div>
+          </Card>
+        ) : (
+          suggestions.map((suggestion, index) => (
+            <Card
+              key={index}
+              className="p-4 bg-none shadow-md border-2 border-[#1977F2] rounded-xl cursor-pointer hover:bg-blue-50"
+              onClick={() =>
+                handleUserResponse(suggestion.text, suggestion.nextStep)
+              }
+            >
               <div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -56,7 +68,6 @@ export default function SuggestionPanel() {
                       Clarifies position
                     </span>
                   </div>
-
                   <a
                     href="#"
                     className="bg-gradient-to-r from-[#1977F2] to-[#D22163] bg-clip-text text-transparent hover:underline text-[14px] font-medium"
@@ -69,9 +80,7 @@ export default function SuggestionPanel() {
                   style={{ borderWidth: "0.5px" }}
                 ></div>
                 <p className="mt-4 text-[#484848] text-[15px] leading-relaxed">
-                  {item === 1
-                    ? "We have less than 9 realtors."
-                    : "Between 10 to 19 realtors"}
+                  {suggestion.text}
                 </p>
                 <a
                   href="#"
@@ -80,9 +89,9 @@ export default function SuggestionPanel() {
                   Use suggestion
                 </a>
               </div>
-            )}
-          </Card>
-        ))}
+            </Card>
+          ))
+        )}
       </div>
     </div>
   );
