@@ -69,9 +69,9 @@ function DashboardContent() {
           }}
         >
           <div className="border-b p-4 flex items-center justify-center w-full">
-            <div className="flex items-center text-center text-[20px]">
-              <span className="text-[#A59FC3]">OraclA</span>
-              <span className="text-[#DC379F] ml-1">c1-pro</span>
+            <div className="flex items-center text-center text-[20px] bg-gradient-to-r from-[#35177d] to-[#D22163] bg-clip-text text-transparent">
+              <span>OraclA</span>
+              <span className="ml-1">c1-pro</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

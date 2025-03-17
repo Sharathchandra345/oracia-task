@@ -9,7 +9,7 @@ export type Message = {
 
 export type Suggestion = {
   text: string;
-  nextStep: number; // Links to the next step in conversation flow
+  nextStep: number;
 };
 
 export type ConversationStep = {

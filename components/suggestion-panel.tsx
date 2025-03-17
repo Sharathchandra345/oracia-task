@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   useConversation,
   conversationFlow,
@@ -21,7 +22,7 @@ export default function SuggestionPanel() {
   return (
     <div className="mt-6">
       <div className="flex items-center gap-2 text-sm text-gray-600">
-        <span className="text-xl">✨</span>
+        <Image src="/assets/starVector.png" alt="Star" width={20} height={20} />
         Best follow-up suggestions
       </div>
 
@@ -68,12 +69,20 @@ export default function SuggestionPanel() {
                       Clarifies position
                     </span>
                   </div>
-                  <a
-                    href="#"
-                    className="bg-gradient-to-r from-[#1977F2] to-[#D22163] bg-clip-text text-transparent hover:underline text-[14px] font-medium"
-                  >
-                    Preview next messages
-                  </a>
+                  <div className="flex items-center gap-1">
+                    <a
+                      href="#"
+                      className="bg-gradient-to-r from-[#1977F2] to-[#D22163] bg-clip-text text-transparent hover:underline text-[14px] font-medium"
+                    >
+                      Predict next messages
+                    </a>
+                    <Image
+                      src="/assets/copyVector.png"
+                      alt="Copy Icon"
+                      width={16}
+                      height={16}
+                    />
+                  </div>
                 </div>
                 <div
                   className="mt-2 border-t border-[#D7D7D7]"
