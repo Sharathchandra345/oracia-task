@@ -92,14 +92,6 @@ export default function Dashboard() {
                 </p>
               </div>
             </div>
-
-            <div className="flex items-center gap-2 text-sm mt-4">
-              <span className="text-[#484848]">
-                Calculating possible conversation paths
-              </span>
-              <div className="animate-spin border-t-2 border-[#DC379F] border-solid h-4 w-4 rounded-full"></div>
-            </div>
-
             <ConversationVisualizer />
             <SuggestionPanel />
           </div>
