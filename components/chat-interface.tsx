@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Paperclip, Clock, Send } from "lucide-react"; // Import icons from Lucide or use SVGs
+import { Paperclip, Clock, Send } from "lucide-react";
 
 const messages = [
   {
@@ -32,14 +32,11 @@ export default function ChatInterface() {
 
   return (
     <div className="flex h-[calc(100vh-10rem)] overflow-hidden">
-      {/* Progress Bar */}
-      <div className="mt-[75%] ml-[2px] mr-[2px] w-[30px] h-[80px] bg-gradient-to-b from-[#1977F2] to-[#0E458C] text-white flex items-start justify-center">
+      <div className="mt-[70%] ml-[2px] mr-[2px] w-[30px] h-[80px] bg-gradient-to-b from-[#1977F2] to-[#0E458C] text-white flex items-start justify-center">
         <span className="text-sm mt-4">15%</span>
       </div>
 
-      {/* Chat Area */}
       <div className="flex flex-col flex-1" style={bgStyle}>
-        {/* Message Display Section */}
         <div className="flex-1 p-4 overflow-y-auto bg-opacity-70">
           <div className="max-w-3xl mx-auto">
             {messages.map((msg, index) => (
@@ -49,7 +46,6 @@ export default function ChatInterface() {
                   msg.sender === "User" ? "justify-end" : ""
                 }`}
               >
-                {/* User Message */}
                 {msg.sender === "User" && (
                   <div className="flex gap-3 items-end">
                     <div className="p-3 rounded-lg shadow-sm max-w-[90%] bg-[#E1FFC7] flex items-end gap-2">
@@ -69,7 +65,6 @@ export default function ChatInterface() {
                   </div>
                 )}
 
-                {/* OraclA Message */}
                 {msg.sender !== "User" && (
                   <div className="flex gap-3 items-start">
                     <Avatar className="h-8 w-8 bg-gradient-to-r from-purple-500 to-pink-500">
@@ -87,8 +82,6 @@ export default function ChatInterface() {
             ))}
           </div>
         </div>
-
-        {/* Message Input Section */}
         <div className="border-t p-2 bg-[#EEF4EE] flex items-center gap-2">
           <button className="p-2">
             <Paperclip className="h-5 w-5 text-gray-500" />

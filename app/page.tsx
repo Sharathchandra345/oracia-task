@@ -31,7 +31,18 @@ export default function Dashboard() {
           <ChatInterface />
         </div>
 
-        <div className="col-span-5 h-screen overflow-y-auto">
+        <div
+          className="col-span-5 flex flex-col h-screen overflow-y-auto"
+          style={{
+            background: `linear-gradient(
+      0% #A59FC3,
+      22% #542B81,
+      51% #DC379F,
+      73% #F3A199,
+      92% #FAF6E8
+    )`,
+          }}
+        >
           <div className="border-b p-4 flex items-center justify-center w-full">
             <div className="flex items-center text-center text-[20px]">
               <span className="text-[#A59FC3]">OraclA</span>
@@ -55,8 +66,7 @@ export default function Dashboard() {
 
           <StatusBar />
 
-          {/* Message Section */}
-          <div className="p-4">
+          <div className="flex-1 overflow-y-auto p-4">
             <div className="text-sm text-gray-600 flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -74,6 +84,7 @@ export default function Dashboard() {
               </svg>
               Last message
             </div>
+
             <div className="flex items-end gap-2 mt-2">
               <div className="relative flex flex-col items-center">
                 <Avatar className="h-6 w-6 bg-gradient-to-r from-[#A59FC3] to-[#DC379F]">
@@ -92,8 +103,11 @@ export default function Dashboard() {
                 </p>
               </div>
             </div>
+
             <ConversationVisualizer />
-            <SuggestionPanel />
+            <div className="overflow-y-auto h-full">
+              <SuggestionPanel />
+            </div>
           </div>
         </div>
       </div>
