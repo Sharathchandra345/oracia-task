@@ -1,94 +1,113 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+"use client";
+
+import { useEffect, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Paperclip, Clock, Send } from "lucide-react"; // Import icons from Lucide or use SVGs
+
+const messages = [
+  {
+    sender: "OraclA",
+    text: "Hello Fabio Rossi, welcome to ORAVOX, I’m OraclA, your sales intelligence agent. To tailor your experience, please select your role.",
+    time: "12:00",
+  },
+  { sender: "User", text: "I am an Owner/Manager", time: "12:00" },
+  {
+    sender: "OraclA",
+    text: "Understood, how many Realtors are in your organization?",
+    time: "12:00",
+  },
+];
 
 export default function ChatInterface() {
+  const [bgStyle, setBgStyle] = useState({});
+
+  useEffect(() => {
+    setBgStyle({
+      backgroundImage: "url('/assets/bg-image.jpg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    });
+  }, []);
+
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)]">
-      <div
-        className="flex-1 p-4 overflow-auto"
-        style={{
-          backgroundImage: "url('/placeholder.svg?height=800&width=800')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.1,
-        }}
-      >
-        <div className="max-w-3xl mx-auto">
-          <div className="flex gap-3 mb-4">
-            <Avatar className="h-8 w-8 bg-gradient-to-r from-purple-500 to-pink-500">
-              <AvatarFallback>OA</AvatarFallback>
-            </Avatar>
-            <div className="bg-white p-3 rounded-lg shadow-sm max-w-[80%]">
-              <p>
-                Hello Fabio Rossi, welcome to ORAVOX, I'm OraclA, your sales
-                intelligence agent. To tailor your experience, please{" "}
-                <span className="font-bold">select your role</span>
-              </p>
-              <span className="text-xs text-gray-400 mt-1 block text-right">
-                12:00
-              </span>
-            </div>
-          </div>
-        </div>
+    <div className="flex h-[calc(100vh-10rem)] overflow-hidden">
+      {/* Progress Bar */}
+      <div className="mt-[75%] ml-[2px] mr-[2px] w-[30px] h-[80px] bg-gradient-to-b from-[#1977F2] to-[#0E458C] text-white flex items-start justify-center">
+        <span className="text-sm mt-4">15%</span>
       </div>
 
-      <div className="border-t p-2 bg-white flex items-center gap-2">
-        <button className="p-2 text-gray-500 hover:text-gray-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-6 w-6"
-          >
-            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-            <polyline points="14 2 14 8 20 8" />
-          </svg>
-        </button>
-        <input
-          type="text"
-          placeholder="Message"
-          className="flex-1 p-2 outline-none text-gray-700"
-        />
-        <button className="p-2 text-gray-500 hover:text-gray-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-6 w-6"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4" />
-            <path d="M12 8h.01" />
-          </svg>
-        </button>
-        <button className="p-2 bg-blue-500 text-white rounded-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-6 w-6"
-          >
-            <path d="m22 2-7 20-4-9-9-4Z" />
-            <path d="M22 2 11 13" />
-          </svg>
-        </button>
+      {/* Chat Area */}
+      <div className="flex flex-col flex-1" style={bgStyle}>
+        {/* Message Display Section */}
+        <div className="flex-1 p-4 overflow-y-auto bg-opacity-70">
+          <div className="max-w-3xl mx-auto">
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`flex gap-3 mb-4 ${
+                  msg.sender === "User" ? "justify-end" : ""
+                }`}
+              >
+                {/* User Message */}
+                {msg.sender === "User" && (
+                  <div className="flex gap-3 items-end">
+                    <div className="p-3 rounded-lg shadow-sm max-w-[90%] bg-[#E1FFC7] flex items-end gap-2">
+                      <p className="flex-1">{msg.text}</p>
+                      <span className="text-xs text-gray-400 whitespace-nowrap">
+                        {msg.time}
+                      </span>
+                    </div>
+
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage
+                        src="/assets/Fabio.png"
+                        className="h-full w-full"
+                      />
+                      <AvatarFallback>{msg.sender[0]}</AvatarFallback>
+                    </Avatar>
+                  </div>
+                )}
+
+                {/* OraclA Message */}
+                {msg.sender !== "User" && (
+                  <div className="flex gap-3 items-start">
+                    <Avatar className="h-8 w-8 bg-gradient-to-r from-purple-500 to-pink-500">
+                      <AvatarFallback>OA</AvatarFallback>
+                    </Avatar>
+                    <div className="p-3 rounded-lg shadow-sm max-w-[80%] bg-white flex items-end gap-2">
+                      <p className="flex-1">{msg.text}</p>
+                      <span className="text-xs text-gray-400 whitespace-nowrap">
+                        {msg.time}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Message Input Section */}
+        <div className="border-t p-2 bg-[#EEF4EE] flex items-center gap-2">
+          <button className="p-2">
+            <Paperclip className="h-5 w-5 text-gray-500" />
+          </button>
+
+          <input
+            type="text"
+            placeholder="Message"
+            className="flex-1 p-2 rounded-full bg-white text-gray-700 outline-none shadow-sm"
+          />
+
+          <button className="p-2">
+            <Clock className="h-5 w-5 text-gray-500" />
+          </button>
+
+          <button className="p-2 bg-gray-500 text-white rounded-full">
+            <Send className="h-5 w-5" />
+          </button>
+        </div>
       </div>
     </div>
   );

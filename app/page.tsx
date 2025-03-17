@@ -7,7 +7,7 @@ import SuggestionPanel from "@/components/suggestion-panel";
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-hidden">
       <header className="border-b p-4 bg-white flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="text-[#484848]">
@@ -31,7 +31,7 @@ export default function Dashboard() {
           <ChatInterface />
         </div>
 
-        <div className="col-span-5">
+        <div className="col-span-5 h-screen overflow-y-auto">
           <div className="border-b p-4 flex items-center justify-center w-full">
             <div className="flex items-center text-center text-[20px]">
               <span className="text-[#A59FC3]">OraclA</span>

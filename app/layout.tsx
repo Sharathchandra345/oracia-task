@@ -22,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased flex`}>
+      <body
+        className={`${poppins.variable} antialiased flex h-screen overflow-hidden`}
+      >
         <LeftPane />
         <main className="flex-1">{children}</main>
       </body>
