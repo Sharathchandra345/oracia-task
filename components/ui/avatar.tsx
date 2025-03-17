@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-
 import { cn } from "@/lib/utils";
 
 const Avatar = React.forwardRef<
@@ -12,7 +11,7 @@ const Avatar = React.forwardRef<
   <AvatarPrimitive.Root
     ref={ref}
     className={cn(
-      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
+      "relative flex items-center justify-center h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gradient-to-r from-[#8c55c6] via-[#DC379F] to-[#F3A199]",
       className
     )}
     {...props}
@@ -22,11 +21,15 @@ Avatar.displayName = AvatarPrimitive.Root.displayName;
 
 const AvatarImage = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Image>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image> & {
+    src?: string;
+  }
+>(({ className, src, ...props }, ref) => (
   <AvatarPrimitive.Image
     ref={ref}
-    className={cn("aspect-square h-full w-full", className)}
+    src={src || "/assets/logo.png"}
+    alt="User Avatar"
+    className={cn("h-[70%] w-[70%] object-contain", className)}
     {...props}
   />
 ));
@@ -39,11 +42,13 @@ const AvatarFallback = React.forwardRef<
   <AvatarPrimitive.Fallback
     ref={ref}
     className={cn(
-      "flex h-full w-full items-center justify-center rounded-full bg-muted",
+      "flex h-full w-full items-center justify-center rounded-full bg-muted text-white",
       className
     )}
     {...props}
-  />
+  >
+    OA
+  </AvatarPrimitive.Fallback>
 ));
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 

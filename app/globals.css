@@ -72,3 +72,12 @@
     color: hsl(var(--foreground));
   }
 }
+
+body {
+  font-family: var(--font-poppins), sans-serif;
+  background-color: #f3f5f7;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

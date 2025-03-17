@@ -10,48 +10,32 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-50">
       <header className="border-b p-4 bg-white flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="h-10 w-10">
-            <Image
-              src="/placeholder.svg?height=40&width=40"
-              alt="Logo"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-          </div>
-          <div>
-            <h1 className="text-gray-700 text-sm">Welcome,</h1>
-            <h2 className="text-lg font-semibold">Fabio Rossi</h2>
+          <div className="text-[#484848]">
+            <h1 className="text-[16px]">Welcome,</h1>
+            <h2 className="text-[20px] font-semibold">Fabio Rossi</h2>
           </div>
         </div>
-        <Avatar className="h-10 w-10">
-          <AvatarImage src="/placeholder.svg?height=40&width=40" alt="User" />
-          <AvatarFallback>FR</AvatarFallback>
-        </Avatar>
+        <div className=" h-10 w-10 rounded-full bg-[#D9D9D9] "></div>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-7 gap-0">
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-0">
         <div className="col-span-5 border-r">
           <div className="border-b p-4 flex items-center gap-4">
-            <Avatar className="h-10 w-10 bg-gradient-to-r from-purple-500 to-pink-500">
+            <Avatar className="h-10 w-10">
+              <AvatarImage className="object-cover" />
               <AvatarFallback>OA</AvatarFallback>
             </Avatar>
+
             <span className="font-medium">OraclA</span>
           </div>
           <ChatInterface />
         </div>
 
-        <div className="col-span-2">
-          <div className="border-b p-4 flex items-center justify-between">
-            <div className="flex items-center">
-              <Avatar className="h-6 w-6 mr-2 bg-gradient-to-r from-purple-500 to-pink-500">
-                <AvatarFallback>OA</AvatarFallback>
-              </Avatar>
-              <span>OraclA</span>
-            </div>
-            <div className="flex items-center">
-              <span className="text-purple-600">OraclA</span>
-              <span className="text-pink-500 ml-1">ci-pro</span>
+        <div className="col-span-5">
+          <div className="border-b p-4 flex items-center justify-center w-full">
+            <div className="flex items-center text-center text-[20px]">
+              <span className="text-[#A59FC3]">OraclA</span>
+              <span className="text-[#DC379F] ml-1">c1-pro</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -71,6 +55,7 @@ export default function Dashboard() {
 
           <StatusBar />
 
+          {/* Message Section */}
           <div className="p-4">
             <div className="text-sm text-gray-600 flex items-center gap-2">
               <svg
@@ -89,18 +74,30 @@ export default function Dashboard() {
               </svg>
               Last message
             </div>
-
-            <div className="mt-2 p-4 bg-white shadow-sm rounded-lg border">
-              <div className="flex gap-3">
-                <Avatar className="h-8 w-8 bg-gradient-to-r from-purple-500 to-pink-500">
+            <div className="flex items-end gap-2 mt-2">
+              <div className="relative flex flex-col items-center">
+                <Avatar className="h-6 w-6 bg-gradient-to-r from-[#A59FC3] to-[#DC379F]">
+                  <AvatarImage className="object-cover" />
                   <AvatarFallback>OA</AvatarFallback>
                 </Avatar>
+              </div>
+
+              <div className="relative bg-white shadow-sm rounded-xl border border-[#EAE7DC] p-3 text-black leading-relaxed max-w-[90%] text-[16px]">
+                <div className="absolute -left-2 bottom-2 w-0 h-0 border-t-[6px] border-t-transparent border-r-[8px] border-r-[#F9F7F2] border-b-[6px] border-b-transparent"></div>
+
                 <p className="text-sm">
                   Hello Fabio Rossi, welcome to ORAVOX, I'm OraclA, your sales
                   intelligence agent. To tailor your experience, please{" "}
                   <span className="font-bold">select your role</span>
                 </p>
               </div>
+            </div>
+
+            <div className="flex items-center gap-2 text-sm mt-4">
+              <span className="text-[#484848]">
+                Calculating possible conversation paths
+              </span>
+              <div className="animate-spin border-t-2 border-[#DC379F] border-solid h-4 w-4 rounded-full"></div>
             </div>
 
             <ConversationVisualizer />

@@ -18,7 +18,7 @@ export default function ConversationVisualizer() {
           <path d="m15 9-6 6" />
           <path d="m9 9 6 6" />
         </svg>
-        Calculating possible conversation paths
+        {/* Calculating possible conversation paths */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
